@@ -173,9 +173,13 @@ HEDLEY_STATIC_ASSERT(SIMDE_ALIGN_OF(simde__m128_private) == 16, "simde__m128_pri
 SIMDE_FUNCTION_ATTRIBUTES
 simde__m128
 simde__m128_from_private(simde__m128_private v) {
+#if defined(SIMDE_X86_SSE_NATIVE)
+  return v.n;
+#else
   simde__m128 r;
   simde_memcpy(&r, &v, sizeof(r));
   return r;
+#endif
 }
 
 SIMDE_FUNCTION_ATTRIBUTES
