@@ -34,7 +34,9 @@
 #include "../simde-f16.h"
 
 #if defined(_WIN32) && !defined(SIMDE_X86_SSE_NATIVE) && defined(_MSC_VER)
+  #if !defined(NOMINMAX)
   #define NOMINMAX
+  #endif
   #include <windows.h>
 #endif
 
