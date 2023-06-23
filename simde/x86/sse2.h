@@ -5156,6 +5156,9 @@ simde_mm_pause (void) {
       __asm__ __volatile__ ("nop" ::: "memory");
     #endif
   #endif
+  #if defined(SIMDE_ARM_NEON_A32V7_NATIVE) || defined(SIMDE_ARM_NEON_A32V8_NATIVE) || defined(SIMDE_ARM_NEON_A64V8_NATIVE)
+    __yield();
+  #endif
 }
 #if defined(SIMDE_X86_SSE2_ENABLE_NATIVE_ALIASES)
   #define _mm_pause() (simde_mm_pause())
