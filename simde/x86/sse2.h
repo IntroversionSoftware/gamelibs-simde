@@ -5166,7 +5166,15 @@ simde_mm_pause (void) {
     #endif
   #endif
   #if defined(SIMDE_ARM_NEON_A32V7_NATIVE) || defined(SIMDE_ARM_NEON_A32V8_NATIVE) || defined(SIMDE_ARM_NEON_A64V8_NATIVE)
-    __yield();
+    #if __has_builtin(__builtin_aarch64_yield)
+      __builtin_aarch64_yield();
+    #elif __has_builtin(__builtin_arm_yield)
+      __builtin_arm_yield();
+    #elif __has_builtin(__yield) || defined(_MSC_VER)
+      __yield();
+    #else
+      __asm__ __volatile__("yield");
+    #endif
   #endif
 }
 #if defined(SIMDE_X86_SSE2_ENABLE_NATIVE_ALIASES)
