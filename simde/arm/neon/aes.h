@@ -168,7 +168,8 @@ simde_vaesmcq_u8(simde_uint8x16_t data) {
   #define vaesmcq_u8(data) simde_vaesmcq_u8((data))
 #endif
 
-static uint8_t Multiply(uint8_t x, uint8_t y)
+SIMDE_FUNCTION_ATTRIBUTES
+uint8_t Multiply(uint8_t x, uint8_t y)
 {
   return (((y & 1) * x) ^
        ((y>>1 & 1) * simde_xtime(x)) ^
