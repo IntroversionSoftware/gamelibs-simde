@@ -630,7 +630,9 @@ typedef union {
     typedef  poly64x2x3_t  simde_poly64x2x3_t;
     typedef  poly64x1x4_t  simde_poly64x1x4_t;
     typedef  poly64x2x4_t  simde_poly64x2x4_t;
+    #if !defined(_MSC_VER) || defined(__clang__)
     typedef     poly128_t     simde_poly128_t;
+    #endif
   #else
     #define SIMDE_ARM_NEON_NEED_PORTABLE_POLY_64_BIT
   #endif
